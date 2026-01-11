@@ -1,6 +1,5 @@
-
 import { GoogleGenAI, Chat, GenerateContentResponse } from "@google/genai";
-import { ChatMessage } from "../types";
+import { ChatMessage } from "../types.ts";
 
 const SYSTEM_INSTRUCTION = `
 أنت المستشار التقني لمركز التميّز التقني التابع لجمعية البرهان.

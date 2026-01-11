@@ -1,13 +1,11 @@
-
 import React, { useState, useEffect } from 'react';
-import Header from './components/Header';
-import AssetBox from './components/AssetBox';
-import AIAdvisor from './components/AIAdvisor';
-import Logo from './components/Logo';
-import TechBackground from './components/TechBackground';
-import MosaicHero from './components/MosaicHero';
-import { ASSET_BOXES, FOUNDATIONS, TRACK_MODULES, getIcon } from './constants';
-// Added Globe to the imported icons from lucide-react to fix line 316 error
+import Header from './components/Header.tsx';
+import AssetBox from './components/AssetBox.tsx';
+import AIAdvisor from './components/AIAdvisor.tsx';
+import Logo from './components/Logo.tsx';
+import TechBackground from './components/TechBackground.tsx';
+import MosaicHero from './components/MosaicHero.tsx';
+import { ASSET_BOXES, FOUNDATIONS, TRACK_MODULES, getIcon } from './constants.tsx';
 import { Send, Mail, Phone, ChevronDown, Zap, Shield, Target, Cpu, Database, Network, ArrowLeft, Activity, Layers, Terminal, Globe } from 'lucide-react';
 
 const App: React.FC = () => {

@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { ASSET_BOXES } from '../constants';
+import { ASSET_BOXES } from '../constants.tsx';
 
 interface MosaicHeroProps {
   onNavigate: (id: string) => void;

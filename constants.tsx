@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Binary, FlaskConical, Users, ShieldCheck, Mail, Target, Database, Globe, Zap, Cpu, Settings, Activity } from 'lucide-react';
-import { AssetBoxProps, FoundationLog, TrackModule } from './types';
+import { AssetBoxProps, FoundationLog, TrackModule } from './types.ts';
 
 export const ASSET_BOXES: AssetBoxProps[] = [
   {

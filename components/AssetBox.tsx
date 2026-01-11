@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { AssetBoxProps } from '../types';
+import { AssetBoxProps } from '../types.ts';
 
 const AssetBox: React.FC<AssetBoxProps> = ({ 
   label, 

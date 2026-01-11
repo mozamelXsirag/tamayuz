@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { Mail, Moon, Sun, Activity, Terminal } from 'lucide-react';
-import Logo from './Logo';
+import Logo from './Logo.tsx';
 
 interface HeaderProps {
   onNavigate: (id: string) => void;
