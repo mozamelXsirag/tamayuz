@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مركز التميّز التقني | هندسة الابتكار</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        accent: '#ff9b0b',
+                        'accent-dark': '#cc7a00',
+                    },
+                    fontFamily: {
+                        mono: ['IBM Plex Mono', 'monospace'],
+                        sans: ['IBM Plex Sans Arabic', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --accent: #ff9b0b;
+            --bg-deep: #0a0a0c;
+            --text-main: #ffffff;
+            --glass: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --grain: url('https://grainy-gradients.vercel.app/noise.svg');
+        }
+
+        html.light {
+            --bg-deep: #ffffff;
+            --text-main: #020617;
+            --glass: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(15, 23, 42, 0.15);
+        }
+
+        body {
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: var(--grain);
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Diagonal Mosaic Navigation (Hero) */
+        .mosaic-container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+            background: var(--bg-deep);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .mosaic-item {
+            position: relative;
+            flex: 1;
+            height: 100%;
+            transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+            clip-path: polygon(15% 0, 100% 0, 85% 100%, 0% 100%);
+            margin-left: -5vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            text-decoration: none;
+            border-left: 1px solid var(--glass-border);
+        }
+
+        .mosaic-item:first-child { clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%); margin-left: 0; }
+        .mosaic-item:last-child { clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%); }
+
+        .mosaic-item:hover {
+            flex: 2;
+            z-index: 10;
+        }
+
+        .mosaic-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: all 1.2s ease;
+            opacity: 0.2;
+            filter: grayscale(1);
+        }
+
+        .mosaic-item:hover .mosaic-bg {
+            opacity: 0.5;
+            filter: grayscale(0) saturate(1.2);
+            transform: scale(1.05);
+        }
+
+        .mosaic-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, transparent 100%);
+            z-index: 1;
+        }
+
+        html.light .mosaic-overlay {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, transparent 100%);
+        }
+
+        .item-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .facet-clip {
+            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+        }
+
+        .facet-clip-reverse {
+            clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+        }
+
+        .facet-card {
+            position: relative;
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        html.light .facet-card {
+            box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(15, 23, 42, 0.1);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scan-line {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(255, 155, 11, 0.02), transparent);
+            background-size: 100% 400px;
+            z-index: 1;
+            pointer-events: none;
+            animation: scanning 12s linear infinite;
+        }
+
+        @keyframes scanning {
+            0% { background-position: 0 -400px; }
+            100% { background-position: 0 100vh; }
+        }
+
+        /* Custom Animated Icons */
+        @keyframes tech-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+        }
+        .animate-tech-pulse { animation: tech-pulse 3s infinite ease-in-out; }
+
+        @keyframes tech-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .animate-tech-rotate { animation: tech-rotate 15s infinite linear; }
+
+        @keyframes float-y {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float-y { animation: float-y 4s infinite ease-in-out; }
+
+        @keyframes draw-line {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+        .animate-draw-line { animation: draw-line 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
+
+        /* HUD Brackets Effect */
+        .hud-brackets::before, .hud-brackets::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border: 2px solid var(--accent);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        .hud-brackets::before { top: 15px; right: 15px; border-bottom: none; border-left: none; }
+        .hud-brackets::after { bottom: 15px; left: 15px; border-top: none; border-right: none; }
+        .group:hover .hud-brackets::before, .group:hover .hud-brackets::after { opacity: 0.6; transform: translate(5px, -5px); }
+        .group:hover .hud-brackets::after { transform: translate(-5px, 5px); }
+
+        @media (max-width: 768px) {
+            .mosaic-container { flex-direction: column; height: auto; }
+            .mosaic-item { clip-path: none !important; margin: 0; height: 33vh; border-bottom: 1px solid var(--glass-border); }
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.35.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
