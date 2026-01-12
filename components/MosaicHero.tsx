@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import { ASSET_BOXES } from '../constants.tsx';
 
-interface MosaicHeroProps {
-  onNavigate: (id: string) => void;
-}
-
-const MosaicHero: React.FC<MosaicHeroProps> = ({ onNavigate }) => {
+const MosaicHero = ({ onNavigate }) => {
+  // Access global constant
+  const ASSET_BOXES = (window as any).ASSET_BOXES;
   const panes = ASSET_BOXES.slice(0, 4); 
-  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const [hoveredIdx, setHoveredIdx] = useState(null);
 
   const images = [
     'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200',
@@ -69,4 +66,4 @@ const MosaicHero: React.FC<MosaicHeroProps> = ({ onNavigate }) => {
   );
 };
 
-export default MosaicHero;
+(window as any).MosaicHero = MosaicHero;

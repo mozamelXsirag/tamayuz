@@ -1,15 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, Send, X } from 'lucide-react';
-import { geminiService } from '../services/gemini.ts';
 
-const AIAdvisor: React.FC = () => {
+const AIAdvisor = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState<{ role: 'user' | 'bot', text: string }[]>([
+  const [messages, setMessages] = useState([
     { role: 'bot', text: 'مرحباً بك. أنا مستشارك الرقمي في مركز التميّز. كيف أساعدك اليوم؟' }
   ]);
   const [isLoading, setIsLoading] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef(null);
+
+  // Access global service
+  const geminiService = (window as any).geminiService;
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -86,4 +88,4 @@ const AIAdvisor: React.FC = () => {
   );
 };
 
-export default AIAdvisor;
+(window as any).AIAdvisor = AIAdvisor;

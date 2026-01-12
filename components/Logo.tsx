@@ -1,11 +1,6 @@
-
 import React from 'react';
 
-interface LogoProps {
-  className?: string;
-}
-
-const Logo: React.FC<LogoProps> = ({ className = "w-10 h-10" }) => {
+const Logo = ({ className = "w-10 h-10" }) => {
   return (
     <svg 
       xmlns="http://www.w3.org/2000/svg" 
@@ -29,4 +24,4 @@ const Logo: React.FC<LogoProps> = ({ className = "w-10 h-10" }) => {
   );
 };
 
-export default Logo;
+(window as any).Logo = Logo;

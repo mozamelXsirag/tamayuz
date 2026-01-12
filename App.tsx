@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import Header from './components/Header.tsx';
-import AssetBox from './components/AssetBox.tsx';
-import AIAdvisor from './components/AIAdvisor.tsx';
-import Logo from './components/Logo.tsx';
-import TechBackground from './components/TechBackground.tsx';
-import MosaicHero from './components/MosaicHero.tsx';
-import { ASSET_BOXES, FOUNDATIONS, TRACK_MODULES, getIcon } from './constants.tsx';
 import { Send, Mail, Phone, ChevronDown, Zap, Shield, Target, Cpu, Database, Network, ArrowLeft, Activity, Layers, Terminal, Globe } from 'lucide-react';
 
-const App: React.FC = () => {
+// Access Global Components
+const Header = (window as any).Header;
+const AIAdvisor = (window as any).AIAdvisor;
+const TechBackground = (window as any).TechBackground;
+const MosaicHero = (window as any).MosaicHero;
+const Logo = (window as any).Logo;
+
+// Access Constants
+const FOUNDATIONS = (window as any).FOUNDATIONS;
+const TRACK_MODULES = (window as any).TRACK_MODULES;
+const getIcon = (window as any).getIcon;
+
+const App = () => {
   const [activeSection, setActiveSection] = useState('hero');
 
-  const navigateTo = (id: string) => {
+  const navigateTo = (id) => {
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
@@ -340,4 +345,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+(window as any).App = App;

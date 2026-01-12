@@ -1,5 +1,4 @@
-import { GoogleGenAI, Chat, GenerateContentResponse } from "@google/genai";
-import { ChatMessage } from "../types.ts";
+import { GoogleGenAI } from "@google/genai";
 
 const SYSTEM_INSTRUCTION = `
 أنت المستشار التقني لمركز التميّز التقني التابع لجمعية البرهان.
@@ -8,14 +7,13 @@ const SYSTEM_INSTRUCTION = `
 ركز على رؤية المركز في ضبط الجودة الرقمية للمحتوى القرآني.
 `;
 
-export class GeminiService {
-  private ai: GoogleGenAI;
-  // Use 'Chat' type from @google/genai as per guidelines
-  private chatSession: Chat;
+class GeminiService {
+  private ai;
+  private chatSession;
 
   constructor() {
     // Initializing GoogleGenAI with the API key directly from process.env.API_KEY
-    this.ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    this.ai = new GoogleGenAI({ apiKey: window.process.env.API_KEY });
     this.chatSession = this.ai.chats.create({
       model: 'gemini-3-flash-preview',
       config: {
@@ -24,10 +22,9 @@ export class GeminiService {
     });
   }
 
-  async sendMessage(message: string): Promise<string> {
+  async sendMessage(message) {
     try {
-      // Accessing the .text property of GenerateContentResponse directly (not as a method)
-      const response: GenerateContentResponse = await this.chatSession.sendMessage({ message });
+      const response = await this.chatSession.sendMessage({ message });
       return response.text || "عذراً، لم أتمكن من معالجة طلبك حالياً.";
     } catch (error) {
       console.error("Gemini API Error:", error);
@@ -36,4 +33,6 @@ export class GeminiService {
   }
 }
 
-export const geminiService = new GeminiService();
+const geminiService = new GeminiService();
+
+(window as any).geminiService = geminiService;

@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Mail, Moon, Sun, Activity, Terminal } from 'lucide-react';
-import Logo from './Logo.tsx';
 
-interface HeaderProps {
-  onNavigate: (id: string) => void;
-  activeSection: string;
-}
-
-const Header: React.FC<HeaderProps> = ({ onNavigate, activeSection }) => {
+const Header = ({ onNavigate, activeSection }) => {
   const [scrolled, setScrolled] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString('ar-SA'));
+
+  // Access Global Components
+  const Logo = (window as any).Logo;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -123,4 +120,4 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, activeSection }) => {
   );
 };
 
-export default Header;
+(window as any).Header = Header;

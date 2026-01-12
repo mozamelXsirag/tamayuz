@@ -1,8 +1,7 @@
 import React from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { AssetBoxProps } from '../types.ts';
 
-const AssetBox: React.FC<AssetBoxProps> = ({ 
+const AssetBox = ({ 
   label, 
   title, 
   description, 
@@ -60,4 +59,4 @@ const AssetBox: React.FC<AssetBoxProps> = ({
   );
 };
 
-export default AssetBox;
+(window as any).AssetBox = AssetBox;

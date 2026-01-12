@@ -1,13 +1,15 @@
+// Types are stripped by Babel in browser. 
+// Keeping this file for reference but commenting out content to prevent runtime issues if loaded.
 
+/*
 export interface AssetBoxProps {
   id: string;
   label: string;
   title: string;
   description: string;
-  sectionId: string; // تم تغيير link إلى sectionId
+  sectionId: string;
   color?: string;
   gridClass?: string;
-  // Made onNavigate optional because it's often injected by the component's parent
   onNavigate?: (sectionId: string) => void;
 }
 
@@ -30,3 +32,4 @@ export interface ChatMessage {
   role: 'user' | 'model';
   parts: { text: string }[];
 }
+*/

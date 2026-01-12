@@ -1,7 +1,6 @@
-
 import React from 'react';
 
-const TechBackground: React.FC = () => {
+const TechBackground = () => {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       {/* Animated Hexagonal Grid Dots */}
@@ -60,4 +59,4 @@ const TechBackground: React.FC = () => {
   );
 };
 
-export default TechBackground;
+(window as any).TechBackground = TechBackground;

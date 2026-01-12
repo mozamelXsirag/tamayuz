@@ -12,8 +12,6 @@
         // Shim for process.env to prevent runtime errors in browser
         window.process = {
             env: {
-                // NOTE: In a real Vercel static deployment, these are not injected automatically into client-side JS.
-                // You would typically use a build step. For this demo, we initialize it empty or rely on manual entry.
                 API_KEY: '' 
             }
         };
@@ -185,7 +183,6 @@
             100% { background-position: 0 100vh; }
         }
 
-        /* Custom Animated Icons */
         @keyframes tech-pulse {
             0%, 100% { transform: scale(1); opacity: 0.3; }
             50% { transform: scale(1.05); opacity: 0.9; }
@@ -210,7 +207,6 @@
         }
         .animate-draw-line { animation: draw-line 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
 
-        /* HUD Brackets Effect */
         .hud-brackets::before, .hud-brackets::after {
             content: '';
             position: absolute;
@@ -233,12 +229,12 @@
 <script type="importmap">
 {
   "imports": {
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/client": "https://esm.sh/react-dom@^19.2.3/client",
+    "lucide-react": "https://esm.sh/lucide-react@0.292.0",
+    "react": "https://esm.sh/react@18.3.1",
+    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
     "@google/genai": "https://esm.sh/@google/genai@^1.35.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/"
+    "react-dom/": "https://esm.sh/react-dom@18.3.1/",
+    "react/": "https://esm.sh/react@18.3.1/"
   }
 }
 </script>
@@ -246,7 +242,35 @@
 </head>
 <body>
     <div id="root"></div>
+
+    <!-- 
+      LOADING SEQUENCE:
+      We load files sequentially via script tags. Babel Standalone fetches them via XHR.
+      Order of execution is generally preserved but to be safe we handle async definition in index.tsx.
+    -->
+    
+    <!-- 1. Utilities and Constants -->
+    <script type="text/babel" data-type="module" src="./constants.tsx"></script>
+    
+    <!-- 2. Services -->
+    <script type="text/babel" data-type="module" src="./services/gemini.ts"></script>
+    
+    <!-- 3. UI Components (Low Level) -->
+    <script type="text/babel" data-type="module" src="./components/Logo.tsx"></script>
+    <script type="text/babel" data-type="module" src="./components/TechBackground.tsx"></script>
+    <script type="text/babel" data-type="module" src="./components/AssetBox.tsx"></script>
+    
+    <!-- 4. UI Components (Mid Level) -->
+    <script type="text/babel" data-type="module" src="./components/MosaicHero.tsx"></script>
+    <script type="text/babel" data-type="module" src="./components/AIAdvisor.tsx"></script>
+    <script type="text/babel" data-type="module" src="./components/Header.tsx"></script>
+    
+    <!-- 5. App Core -->
+    <script type="text/babel" data-type="module" src="./App.tsx"></script>
+    
+    <!-- 6. Entry Point -->
     <script type="text/babel" data-type="module" src="./index.tsx"></script>
+
 <script type="module" src="/index.tsx"></script>
 </body>
 </html>
